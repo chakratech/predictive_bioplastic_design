@@ -65,7 +65,7 @@ df = pd.read_parquet('bioplastic_design/predictions_01_11_2022.parquet')
 
 ## Roadmap
 
-- [ ] Add PLA to target plastic list
+- [x] Add PLA to target plastic list
 - [ ] Add starch as a blend/copolymer candidate
 - [ ] Radar charts comparing predicted properties vs. target plastics
 - [ ] Property distribution plots for the candidate search space
