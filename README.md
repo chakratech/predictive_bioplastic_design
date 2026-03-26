@@ -23,6 +23,7 @@ This means **screening.ipynb works fully** using the pre-computed predictions, b
 ## Goals
 
 - **Expand target plastics** — Add PLA and other commercially relevant polymers to the replacement target list (original covers PE, PP, PVC, PET, PS, Nylon 6, PEN)
+- **Structural filtering** — Filter candidates by chemical structure (e.g. removing aromatic PHA monomers) using RDKit to focus on biologically producible, biodegradable replacements
 - **Additional blend candidates** — Add starch as a copolymer/blend partner alongside the original 13 conventional polymers
 - **Property visualization** — Build radar charts and comparison plots for predicted vs. target properties
 - **Industrial focus** — Tailor screening criteria to real-world PHA production constraints
@@ -63,9 +64,20 @@ df = pd.read_parquet('bioplastic_design/predictions_01_11_2022.parquet')
 
 **[search_space.ipynb](bioplastic_design/search_space.ipynb)** shows how the candidate space is constructed: 540 PHA monomers (varying backbone length, side-chain length, and end group) are combined into copolymers at 11 compositions (0%, 10%, ..., 100%) with each other and with 13 conventional polymers. The `predict()` function in this notebook is a placeholder — see [What's included and what's not](#whats-included-and-whats-not) above.
 
+### Filtering Candidates
+
+**[scripts/filter_aromatic_pha.py](bioplastic_design/scripts/filter_aromatic_pha.py)** filters exported candidates to remove copolymers where any PHA monomer contains aromatic atoms. Aromatic PHAs are harder to produce biologically and harder to biodegrade. Uses RDKit for reliable aromaticity detection.
+
+The same filtering is also applied within `screening.ipynb` to re-run the nearest-neighbor search on the full ~1.4M candidate dataset with aromatic PHAs excluded, producing a separate set of aliphatic-only replacement candidates.
+
+Shared chemistry utilities (SMILES parsing, aromaticity checks) live in **[utils/chemistry.py](bioplastic_design/utils/chemistry.py)** and are used by both the script and the notebook.
+
 ## Roadmap
 
 - [x] Add PLA to target plastic list
+- [x] Filter aromatic PHA monomers from candidates using RDKit
+- [x] Re-screen full candidate space with aromatic filter applied
+- [x] Shared chemistry utilities module (`utils/chemistry.py`)
 - [ ] Add starch as a blend/copolymer candidate
 - [ ] Radar charts comparing predicted properties vs. target plastics
 - [ ] Property distribution plots for the candidate search space
