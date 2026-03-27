@@ -78,10 +78,12 @@ Shared chemistry utilities (SMILES parsing, aromaticity checks) live in **[utils
 - [x] Filter aromatic PHA monomers from candidates using RDKit
 - [x] Re-screen full candidate space with aromatic filter applied
 - [x] Shared chemistry utilities module (`utils/chemistry.py`)
-- [ ] Add starch as a blend/copolymer candidate
+- [x] Property comparison plots (predicted vs. experimental for original and aliphatic candidates)
+- [x] Distance vs rank analysis showing impact of aromatic filtering
 - [ ] Radar charts comparing predicted properties vs. target plastics
 - [ ] Property distribution plots for the candidate search space
 - [ ] Add other biodegradable targets (PBAT, PCL)
+- [ ] Add starch as a blend/copolymer candidate
 - [ ] Refine screening criteria for ChakraTech's production capabilities
 - [ ] Integrate polyBERT fingerprinting for expanded candidate screening
 - [ ] Train custom property predictors on experimental data
